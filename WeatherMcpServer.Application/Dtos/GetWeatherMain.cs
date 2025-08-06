@@ -1,6 +1,6 @@
-﻿namespace WeatherMcpServer.Domain.Dtos
+﻿namespace WeatherMcpServer.Application.Dtos
 {
-    public class GetCurrentWeatherMain
+    public class GetWeatherMain
     {
         public float Temp { get; set; }
         public float Feels_like { get; set; }

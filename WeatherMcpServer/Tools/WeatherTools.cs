@@ -6,23 +6,62 @@ namespace WeatherMcpServer.Tools;
 
 public class WeatherTools(IWeatherService weatherService)
 {
-    [McpServerTool]
-    [Description("Describes random weather in the provided city.")]
+    [McpServerTool(Name = "current_weather")]
+    [Description("Describes weather in the provided city.")]
     public async Task<string> GetCityWeatherAsync(
-        [Description("Name of the city to return weather for")] string city)
+        [Description("City to return weather for")] string city)
     {
-        var weather = await weatherService.GetCurrentWeatherAsync(city);
-        if( weather == null)
+        try
         {
-            return $"Weather data for '{city}' not found.";
-        }
-        
-        var result = $"Weather in {weather.Name}:\n" +
-                    $"Temperature: {weather.Main.Temp}�C\n" +
-                    $"Feels Like: {weather.Main.Feels_like}�C\n" +
-                    $"Humidity: {weather.Main.Humidity}%\n" +
-                    $"Description: {string.Join(',', weather.Weather.Select(x => x.Description))}";
+            var weather = await weatherService.GetCurrentWeatherAsync(city);
 
-        return result;
+            if (weather == null)
+            {
+                return $"Weather data for '{city}' not found.";
+            }
+
+            var cityInfo = $"Temperature: {weather.Main.Temp}�C\n" +
+                        $"Feels Like: {weather.Main.Feels_like}�C\n" +
+                        $"Humidity: {weather.Main.Humidity}%\n" +
+                        $"Description: {string.Join(',', weather.Weather.Select(x => x.Description))}";
+
+            return cityInfo;
+        }
+        catch (Exception ex)
+        {
+            return $"Error fetching weather for '{city}': {ex.Message}";
+        }
+    }
+
+    [McpServerTool(Name = "forecast_weather")]
+    [Description("Get weather forecast for a city after 72 hours.")]
+    public async Task<string> GetCityForecastAsync(
+        [Description("City to return forecast for. Also specify hours ahead.")] string city)
+    {
+        try
+        {
+            var forecast = await weatherService.GetForecastAsync(city);
+            if (forecast == null)
+            {
+                return $"Forecast data for '{city}' not found.";
+            }
+
+            var index = 25; // Couldn't find a way to pass hours ahead, so using 24 as default
+            var item = forecast.List.ElementAtOrDefault(index)
+                ?? throw new ArgumentException("Out of time range");
+
+            var forecastInfo =
+                    $"Date: {item.Dt_txt}\n" +
+                    $"Temperature: {item.Main.Temp}�C\n" +
+                    $"Feels like: {item.Main.Feels_like}�C\n" +
+                    $"Humidity: {item.Main.Humidity}%\n" +
+                    $"Description: {string.Join(',', item.Weather.Select(x => x.Description))}";
+
+            return forecastInfo;
+        }
+        catch(Exception ex)
+        {
+            return $"Error fetching forecast for '{city}': {ex.Message}";
+        }
     }
 }

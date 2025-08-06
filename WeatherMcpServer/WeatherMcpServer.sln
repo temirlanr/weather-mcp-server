@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherMcpServer", "Weather
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherMcpServer.Application", "..\WeatherMcpServer.Application\WeatherMcpServer.Application.csproj", "{0924D9FB-B312-47C2-9981-E5F6EA610CB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherMcpServer.Domain", "..\WeatherMcpServer.Domain\WeatherMcpServer.Domain.csproj", "{0072C8A4-EABE-41AF-AED6-1BA186B86FC9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{0924D9FB-B312-47C2-9981-E5F6EA610CB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0924D9FB-B312-47C2-9981-E5F6EA610CB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0924D9FB-B312-47C2-9981-E5F6EA610CB1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0072C8A4-EABE-41AF-AED6-1BA186B86FC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0072C8A4-EABE-41AF-AED6-1BA186B86FC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0072C8A4-EABE-41AF-AED6-1BA186B86FC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0072C8A4-EABE-41AF-AED6-1BA186B86FC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,8 +11,4 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.8" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\WeatherMcpServer.Domain\WeatherMcpServer.Domain.csproj" />
-  </ItemGroup>
-
 </Project>
