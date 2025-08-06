@@ -20,8 +20,8 @@ public class WeatherTools(IWeatherService weatherService)
                 return $"Weather data for '{city}' not found.";
             }
 
-            var cityInfo = $"Temperature: {weather.Main.Temp}�C\n" +
-                        $"Feels Like: {weather.Main.Feels_like}�C\n" +
+            var cityInfo = $"Temperature: {weather.Main.Temp - 273.15}�C\n" +
+                        $"Feels Like: {weather.Main.Feels_like - 273.15}�C\n" +
                         $"Humidity: {weather.Main.Humidity}%\n" +
                         $"Description: {string.Join(',', weather.Weather.Select(x => x.Description))}";
 
@@ -46,14 +46,14 @@ public class WeatherTools(IWeatherService weatherService)
                 return $"Forecast data for '{city}' not found.";
             }
 
-            var index = 25; // Couldn't find a way to pass hours ahead, so using 24 as default
+            var index = 25; // Couldn't find a way to pass hours ahead, so using 25 as default
             var item = forecast.List.ElementAtOrDefault(index)
                 ?? throw new ArgumentException("Out of time range");
 
             var forecastInfo =
                     $"Date: {item.Dt_txt}\n" +
-                    $"Temperature: {item.Main.Temp}�C\n" +
-                    $"Feels like: {item.Main.Feels_like}�C\n" +
+                    $"Temperature: {item.Main.Temp - 273.15}�C\n" +
+                    $"Feels like: {item.Main.Feels_like - 273.15}�C\n" +
                     $"Humidity: {item.Main.Humidity}%\n" +
                     $"Description: {string.Join(',', item.Weather.Select(x => x.Description))}";
 
